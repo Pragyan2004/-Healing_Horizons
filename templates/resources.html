@@ -1,0 +1,612 @@
+{% extends "base.html" %}
+
+{% block title %}Resources & Support - Healing Horizons{% endblock %}
+
+{% block extra_css %}
+<style>
+    .resource-card {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .resource-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(244, 63, 94, 0.1);
+    }
+    
+    .emergency-card {
+        background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+        color: white;
+        animation: pulse 2s infinite;
+    }
+    
+    .category-tag {
+        background: rgba(244, 63, 94, 0.1);
+        color: #f43f5e;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+    
+    .resource-icon {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        font-size: 24px;
+    }
+    
+    .filter-btn.active {
+        background: linear-gradient(135deg, #f43f5e, #8b5cf6);
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-8">
+    <!-- Hero Section -->
+    <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+            <span class="gradient-text">Resources & Support</span>
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto">
+            Curated list of Indian helplines, therapists, support groups, and self-help materials 
+            to aid your recovery journey.
+        </p>
+    </div>
+
+    <!-- Emergency Banner -->
+    <div class="emergency-card rounded-2xl p-8 mb-12">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+            <div class="mb-6 md:mb-0 md:mr-8">
+                <h2 class="text-2xl font-bold mb-3">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    Need Immediate Help?
+                </h2>
+                <p class="text-white/90 mb-4">
+                    If you're in crisis or having thoughts of self-harm, contact these helplines immediately.
+                    You are not alone.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full md:w-auto">
+                <a href="tel:18602662345" 
+                   class="bg-white text-rose-600 px-6 py-3 rounded-xl font-bold hover:bg-rose-50 transition text-center">
+                    <i class="fas fa-phone mr-2"></i> 1860-266-2345
+                </a>
+                <a href="tel:9152987821" 
+                   class="bg-white text-rose-600 px-6 py-3 rounded-xl font-bold hover:bg-rose-50 transition text-center">
+                    <i class="fas fa-phone mr-2"></i> 9152987821
+                </a>
+                <a href="tel:1098" 
+                   class="bg-white text-rose-600 px-6 py-3 rounded-xl font-bold hover:bg-rose-50 transition text-center">
+                    <i class="fas fa-phone mr-2"></i> 1098
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="glass-card p-6 mb-8">
+        <h3 class="text-lg font-bold mb-4 text-slate-700">Filter Resources</h3>
+        <div class="flex flex-wrap gap-3">
+            <button class="filter-btn px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition active" 
+                    data-filter="all">
+                <i class="fas fa-layer-group mr-2"></i> All Resources
+            </button>
+            <button class="filter-btn px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition" 
+                    data-filter="helpline">
+                <i class="fas fa-phone-alt mr-2"></i> Helplines
+            </button>
+            <button class="filter-btn px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition" 
+                    data-filter="therapist">
+                <i class="fas fa-user-md mr-2"></i> Therapists
+            </button>
+            <button class="filter-btn px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition" 
+                    data-filter="online">
+                <i class="fas fa-laptop-medical mr-2"></i> Online Therapy
+            </button>
+            <button class="filter-btn px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition" 
+                    data-filter="support">
+                <i class="fas fa-users mr-2"></i> Support Groups
+            </button>
+            <button class="filter-btn px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 transition" 
+                    data-filter="book">
+                <i class="fas fa-book mr-2"></i> Books & Articles
+            </button>
+        </div>
+    </div>
+
+    <!-- Resources Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <!-- Resource 1: Vandrevala Foundation -->
+        <div class="resource-card rounded-2xl p-6" data-category="helpline">
+            <div class="flex items-start mb-4">
+                <div class="resource-icon bg-rose-100 text-rose-600 mr-4">
+                    <i class="fas fa-phone-volume"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Vandrevala Foundation</h3>
+                    <span class="category-tag">Helpline • 24/7 • Free</span>
+                </div>
+            </div>
+            <p class="text-slate-600 mb-4">
+                Free mental health helpline providing emotional support and crisis intervention across India.
+            </p>
+            <div class="space-y-2 mb-4">
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-phone mr-3 text-rose-500"></i>
+                    <span class="font-mono">1860-266-2345</span>
+                </div>
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-globe mr-3 text-rose-500"></i>
+                    <a href="https://www.vandrevalafoundation.com" class="hover:text-rose-600">
+                        www.vandrevalafoundation.com
+                    </a>
+                </div>
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-clock mr-3 text-rose-500"></i>
+                    <span>24/7 Available</span>
+                </div>
+            </div>
+            <button class="btn-primary w-full" onclick="app.callNumber('18602662345')">
+                <i class="fas fa-phone mr-2"></i> Call Now
+            </button>
+        </div>
+
+        <!-- Resource 2: iCall Psychosocial Helpline -->
+        <div class="resource-card rounded-2xl p-6" data-category="helpline online">
+            <div class="flex items-start mb-4">
+                <div class="resource-icon bg-purple-100 text-purple-600 mr-4">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">iCall Psychosocial Helpline</h3>
+                    <span class="category-tag">Helpline • Email • Professional</span>
+                </div>
+            </div>
+            <p class="text-slate-600 mb-4">
+                Professional counseling service by Tata Institute of Social Sciences, offering email and phone support.
+            </p>
+            <div class="space-y-2 mb-4">
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-phone mr-3 text-purple-500"></i>
+                    <span class="font-mono">9152987821</span>
+                </div>
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-envelope mr-3 text-purple-500"></i>
+                    <a href="mailto:icall@tiss.edu" class="hover:text-purple-600">
+                        icall@tiss.edu
+                    </a>
+                </div>
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-clock mr-3 text-purple-500"></i>
+                    <span>Mon-Sat: 10AM-8PM</span>
+                </div>
+            </div>
+            <button class="btn-outline w-full" onclick="app.callNumber('9152987821')">
+                <i class="fas fa-phone mr-2"></i> Call Now
+            </button>
+        </div>
+
+        <!-- Resource 3: The Mind Clan -->
+        <div class="resource-card rounded-2xl p-6" data-category="online therapist">
+            <div class="flex items-start mb-4">
+                <div class="resource-icon bg-blue-100 text-blue-600 mr-4">
+                    <i class="fas fa-laptop-medical"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">The Mind Clan</h3>
+                    <span class="category-tag">Online Therapy • Affordable • Verified</span>
+                </div>
+            </div>
+            <p class="text-slate-600 mb-4">
+                Online therapy platform connecting you with verified mental health professionals across India.
+            </p>
+            <div class="space-y-2 mb-4">
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-globe mr-3 text-blue-500"></i>
+                    <a href="https://themindclan.com" class="hover:text-blue-600">
+                        themindclan.com
+                    </a>
+                </div>
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-rupee-sign mr-3 text-blue-500"></i>
+                    <span>Starting at ₹500/session</span>
+                </div>
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-language mr-3 text-blue-500"></i>
+                    <span>10+ Indian languages</span>
+                </div>
+            </div>
+            <a href="https://themindclan.com" target="_blank" class="btn-primary w-full text-center block">
+                <i class="fas fa-external-link-alt mr-2"></i> Visit Website
+            </a>
+        </div>
+
+        <!-- Resource 4: YourDOST -->
+        <div class="resource-card rounded-2xl p-6" data-category="online support">
+            <div class="flex items-start mb-4">
+                <div class="resource-icon bg-green-100 text-green-600 mr-4">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">YourDOST</h3>
+                    <span class="category-tag">Emotional Support • Anonymous • Free Chat</span>
+                </div>
+            </div>
+            <p class="text-slate-600 mb-4">
+                Anonymous online emotional wellness platform offering chat support with trained listeners.
+            </p>
+            <div class="space-y-2 mb-4">
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-globe mr-3 text-green-500"></i>
+                    <a href="https://yourdost.com" class="hover:text-green-600">
+                        yourdost.com
+                    </a>
+                </div>
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-mobile-alt mr-3 text-green-500"></i>
+                    <span>Mobile App Available</span>
+                </div>
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-users mr-3 text-green-500"></i>
+                    <span>1M+ users helped</span>
+                </div>
+            </div>
+            <a href="https://yourdost.com" target="_blank" class="btn-outline w-full text-center block">
+                <i class="fas fa-external-link-alt mr-2"></i> Get Support
+            </a>
+        </div>
+
+        <!-- Resource 5: AASRA -->
+        <div class="resource-card rounded-2xl p-6" data-category="helpline">
+            <div class="flex items-start mb-4">
+                <div class="resource-icon bg-rose-100 text-rose-600 mr-4">
+                    <i class="fas fa-life-ring"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">AASRA</h3>
+                    <span class="category-tag">Crisis Intervention • Suicide Prevention • 24/7</span>
+                </div>
+            </div>
+            <p class="text-slate-600 mb-4">
+                Non-profit organization providing suicide prevention and emotional support since 1996.
+            </p>
+            <div class="space-y-2 mb-4">
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-phone mr-3 text-rose-500"></i>
+                    <span class="font-mono">9820466726</span>
+                </div>
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-envelope mr-3 text-rose-500"></i>
+                    <a href="mailto:aasrahelpline@yahoo.com" class="hover:text-rose-600">
+                        aasrahelpline@yahoo.com
+                    </a>
+                </div>
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-clock mr-3 text-rose-500"></i>
+                    <span>24/7 Available</span>
+                </div>
+            </div>
+            <button class="btn-primary w-full" onclick="app.callNumber('9820466726')">
+                <i class="fas fa-phone mr-2"></i> Call Now
+            </button>
+        </div>
+
+        <!-- Resource 6: Manasthali -->
+        <div class="resource-card rounded-2xl p-6" data-category="therapist support">
+            <div class="flex items-start mb-4">
+                <div class="resource-icon bg-indigo-100 text-indigo-600 mr-4">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Manasthali</h3>
+                    <span class="category-tag">Women's Mental Health • Support Groups • Workshops</span>
+                </div>
+            </div>
+            <p class="text-slate-600 mb-4">
+                Dedicated to women's mental health with specialized support groups for relationship issues.
+            </p>
+            <div class="space-y-2 mb-4">
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-globe mr-3 text-indigo-500"></i>
+                    <a href="https://manasthali.org" class="hover:text-indigo-600">
+                        manasthali.org
+                    </a>
+                </div>
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-map-marker-alt mr-3 text-indigo-500"></i>
+                    <span>Delhi, Mumbai, Bangalore</span>
+                </div>
+                <div class="flex items-center text-slate-700">
+                    <i class="fas fa-calendar mr-3 text-indigo-500"></i>
+                    <span>Weekly workshops</span>
+                </div>
+            </div>
+            <a href="https://manasthali.org" target="_blank" class="btn-outline w-full text-center block">
+                <i class="fas fa-external-link-alt mr-2"></i> Learn More
+            </a>
+        </div>
+    </div>
+
+    <!-- Books & Self-Help Section -->
+    <div class="glass-card p-8 mb-12">
+        <h2 class="text-3xl font-bold mb-8 text-center">
+            <span class="gradient-text">Books & Self-Help Materials</span>
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Book 1 -->
+            <div class="flex items-start">
+                <div class="w-24 h-32 bg-gradient-to-br from-rose-100 to-pink-100 rounded-lg flex items-center justify-center mr-6">
+                    <i class="fas fa-book-open text-3xl text-rose-600"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">"It's Called a Breakup Because It's Broken"</h3>
+                    <p class="text-slate-600 mb-3">By Greg Behrendt & Amiira Ruotola</p>
+                    <p class="text-slate-500 text-sm mb-4">
+                        A no-nonsense guide to surviving breakups with humor and practical advice.
+                    </p>
+                    <span class="category-tag">Book • Practical • Humor</span>
+                </div>
+            </div>
+
+            <!-- Book 2 -->
+            <div class="flex items-start">
+                <div class="w-24 h-32 bg-gradient-to-br from-purple-100 to-violet-100 rounded-lg flex items-center justify-center mr-6">
+                    <i class="fas fa-book-medical text-3xl text-purple-600"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">"The Journey from Abandonment to Healing"</h3>
+                    <p class="text-slate-600 mb-3">By Susan Anderson</p>
+                    <p class="text-slate-500 text-sm mb-4">
+                        Therapeutic guide for overcoming abandonment and building self-worth.
+                    </p>
+                    <span class="category-tag">Book • Therapeutic • Recovery</span>
+                </div>
+            </div>
+
+            <!-- Book 3 -->
+            <div class="flex items-start">
+                <div class="w-24 h-32 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-lg flex items-center justify-center mr-6">
+                    <i class="fas fa-brain text-3xl text-blue-600"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">"How to Fix a Broken Heart"</h3>
+                    <p class="text-slate-600 mb-3">By Guy Winch</p>
+                    <p class="text-slate-500 text-sm mb-4">
+                        Scientific approach to healing from heartbreak with actionable steps.
+                    </p>
+                    <span class="category-tag">Book • Science-based • Actionable</span>
+                </div>
+            </div>
+
+            <!-- Book 4 -->
+            <div class="flex items-start">
+                <div class="w-24 h-32 bg-gradient-to-br from-green-100 to-emerald-100 rounded-lg flex items-center justify-center mr-6">
+                    <i class="fas fa-heart text-3xl text-green-600"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">"The Wisdom of a Broken Heart"</h3>
+                    <p class="text-slate-600 mb-3">By Susan Piver</p>
+                    <p class="text-slate-500 text-sm mb-4">
+                        Buddhist-inspired approach to finding peace and growth after heartbreak.
+                    </p>
+                    <span class="category-tag">Book • Spiritual • Mindfulness</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- City-wise Therapists -->
+    <div class="glass-card p-8">
+        <h2 class="text-3xl font-bold mb-8 text-center">
+            <span class="gradient-text">City-wise Professional Help</span>
+        </h2>
+        
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead>
+                    <tr class="border-b border-slate-200">
+                        <th class="text-left py-4 px-6 text-slate-700 font-semibold">City</th>
+                        <th class="text-left py-4 px-6 text-slate-700 font-semibold">Organization</th>
+                        <th class="text-left py-4 px-6 text-slate-700 font-semibold">Specialization</th>
+                        <th class="text-left py-4 px-6 text-slate-700 font-semibold">Contact</th>
+                        <th class="text-left py-4 px-6 text-slate-700 font-semibold">Appointment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-slate-100 hover:bg-rose-50/50 transition">
+                        <td class="py-4 px-6">
+                            <div class="font-medium">Mumbai</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <div class="font-medium">The Bombay Psychiatric Centre</div>
+                            <div class="text-sm text-slate-500">Bandra West</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <span class="category-tag text-xs">Relationship Therapy</span>
+                        </td>
+                        <td class="py-4 px-6">
+                            <div class="text-slate-700">022-26484648</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <a href="#" class="text-rose-600 hover:text-rose-700 font-medium">
+                                Book Now <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    
+                    <tr class="border-b border-slate-100 hover:bg-purple-50/50 transition">
+                        <td class="py-4 px-6">
+                            <div class="font-medium">Delhi</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <div class="font-medium">Sanjivini Society for Mental Health</div>
+                            <div class="text-sm text-slate-500">South Delhi</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <span class="category-tag text-xs">Support Groups</span>
+                        </td>
+                        <td class="py-4 px-6">
+                            <div class="text-slate-700">011-41092787</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <a href="#" class="text-purple-600 hover:text-purple-700 font-medium">
+                                Book Now <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    
+                    <tr class="border-b border-slate-100 hover:bg-blue-50/50 transition">
+                        <td class="py-4 px-6">
+                            <div class="font-medium">Bangalore</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <div class="font-medium">Cadabams Hospitals</div>
+                            <div class="text-sm text-slate-500">J.P. Nagar</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <span class="category-tag text-xs">CBT Therapy</span>
+                        </td>
+                        <td class="py-4 px-6">
+                            <div class="text-slate-700">080-25492000</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">
+                                Book Now <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    
+                    <tr class="hover:bg-green-50/50 transition">
+                        <td class="py-4 px-6">
+                            <div class="font-medium">Chennai</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <div class="font-medium">SCARF India</div>
+                            <div class="text-sm text-slate-500">Anna Nagar</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <span class="category-tag text-xs">Family Counseling</span>
+                        </td>
+                        <td class="py-4 px-6">
+                            <div class="text-slate-700">044-26153971</div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <a href="#" class="text-green-600 hover:text-green-700 font-medium">
+                                Book Now <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Additional Tips -->
+    <div class="mt-12 p-8 rounded-2xl bg-gradient-to-r from-slate-50 to-rose-50">
+        <h3 class="text-2xl font-bold mb-6 text-center text-slate-800">
+            <i class="fas fa-lightbulb mr-3 text-yellow-500"></i>
+            Tips for Seeking Help
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="p-6 bg-white rounded-xl">
+                <div class="text-rose-500 text-2xl mb-4">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <h4 class="font-bold mb-2">Find the Right Fit</h4>
+                <p class="text-slate-600 text-sm">
+                    It's okay to try different therapists. Find someone you feel comfortable with.
+                </p>
+            </div>
+            <div class="p-6 bg-white rounded-xl">
+                <div class="text-purple-500 text-2xl mb-4">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h4 class="font-bold mb-2">Consistency is Key</h4>
+                <p class="text-slate-600 text-sm">
+                    Regular sessions yield better results than occasional visits.
+                </p>
+            </div>
+            <div class="p-6 bg-white rounded-xl">
+                <div class="text-blue-500 text-2xl mb-4">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h4 class="font-bold mb-2">Be Patient</h4>
+                <p class="text-slate-600 text-sm">
+                    Healing takes time. Celebrate small victories along the way.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Filter functionality
+    document.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            // Update active state
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            // Filter resources
+            const filter = this.dataset.filter;
+            const resources = document.querySelectorAll('.resource-card');
+            
+            resources.forEach(resource => {
+                if (filter === 'all') {
+                    resource.style.display = 'block';
+                } else {
+                    const categories = resource.dataset.category.split(' ');
+                    if (categories.includes(filter)) {
+                        resource.style.display = 'block';
+                    } else {
+                        resource.style.display = 'none';
+                    }
+                }
+            });
+        });
+    });
+    
+    // Call number function
+    window.app.callNumber = function(number) {
+        if (confirm(`Call ${number}?`)) {
+            window.location.href = `tel:${number}`;
+        }
+    };
+    
+    // Search functionality
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = 'Search resources...';
+    searchInput.className = 'form-input mb-6 w-full';
+    searchInput.addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const resources = document.querySelectorAll('.resource-card');
+        
+        resources.forEach(resource => {
+            const text = resource.textContent.toLowerCase();
+            if (text.includes(searchTerm)) {
+                resource.style.display = 'block';
+            } else {
+                resource.style.display = 'none';
+            }
+        });
+    });
+    
+    // Insert search at the beginning
+    const heroSection = document.querySelector('.text-center');
+    heroSection.insertAdjacentElement('afterend', searchInput);
+</script>
+{% endblock %}

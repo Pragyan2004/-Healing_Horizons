@@ -1,0 +1,479 @@
+{% extends "base.html" %}
+
+{% block title %}Healing Horizons - Your Breakup Recovery Companion{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero-section {
+        background: linear-gradient(135deg,
+            rgba(244, 63, 94, 0.1) 0%,
+            rgba(139, 92, 246, 0.1) 50%,
+            rgba(236, 72, 153, 0.1) 100%),
+        url("{{ url_for('static', filename='images/hero-bg.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        background-blend-mode: overlay;
+    }
+
+    .feature-card {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px) scale(1.02);
+    }
+
+    .testimonial-card {
+        background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.9) 0%,
+                rgba(255, 255, 255, 0.7) 100%);
+        backdrop-filter: blur(10px);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section min-h-[80vh] flex items-center relative overflow-hidden">
+    <div class="container mx-auto px-6 py-20 relative z-10">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                <span class="gradient-text">Healing</span>
+                <span class="text-slate-800">Begins Here</span>
+            </h1>
+
+            <p class="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
+                Your AI-powered companion for breakup recovery, emotional healing, and personal growth.
+                Designed with ❤️ for the Indian community.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{{ url_for('generate_plan') }}" class="btn-primary text-lg px-8 py-4">
+                    <i class="fas fa-magic mr-2"></i> Start Healing Journey
+                </a>
+                <a href="#features" class="btn-outline text-lg px-8 py-4">
+                    <i class="fas fa-play-circle mr-2"></i> How It Works
+                </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-3xl mx-auto">
+                <div class="glass-card p-6 text-center hover-lift">
+                    <div class="text-3xl font-bold text-rose-600 mb-2">{{ "{:,}".format(stats.healed_hearts) }}+</div>
+                    <div class="text-slate-600">Healed Hearts</div>
+                </div>
+                <div class="glass-card p-6 text-center hover-lift">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">24/7</div>
+                    <div class="text-slate-600">AI Support</div>
+                </div>
+                <div class="glass-card p-6 text-center hover-lift">
+                    <div class="text-3xl font-bold text-indigo-600 mb-2">{{ stats.satisfaction_rate }}%</div>
+                    <div class="text-slate-600">Satisfaction</div>
+                </div>
+                <div class="glass-card p-6 text-center hover-lift">
+                    <div class="text-3xl font-bold text-pink-600 mb-2">{{ stats.local_resources }}+</div>
+                    <div class="text-slate-600">Local Resources</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Elements -->
+    <div
+        class="absolute top-20 left-10 w-20 h-20 bg-rose-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float">
+    </div>
+    <div class="absolute bottom-20 right-10 w-32 h-32 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"
+        style="animation-delay: 1s"></div>
+</section>
+
+<!-- Service Status Banner -->
+<section class="py-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-y border-blue-100">
+    <div class="container mx-auto px-6">
+        <div class="flex items-center justify-center gap-4 text-center">
+            <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <span class="text-sm font-medium text-slate-700">Service Active</span>
+            </div>
+            <div class="hidden md:block w-px h-6 bg-slate-300"></div>
+            <p class="text-sm text-slate-600 max-w-2xl">
+                <i class="fas fa-info-circle text-blue-500 mr-1"></i>
+                Our AI provides personalized guidance. During high-traffic periods, you'll receive expertly crafted
+                pre-generated recovery plans.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-16">
+            <span class="gradient-text">Your Recovery Toolkit</span>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Feature 1 -->
+            <div class="feature-card glass-card p-8 text-center hover-lift">
+                <div
+                    class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-rose-100 to-pink-100 flex items-center justify-center">
+                    <i class="fas fa-brain text-3xl text-rose-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">AI Therapist</h3>
+                <p class="text-slate-600 mb-4">
+                    Get personalized emotional support from our AI therapist, available 24/7.
+                </p>
+                <ul class="text-left text-slate-500 space-y-2">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Empathetic responses</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Culturally aware advice</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Evidence-based strategies</li>
+                </ul>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card glass-card p-8 text-center hover-lift">
+                <div
+                    class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-purple-100 to-violet-100 flex items-center justify-center">
+                    <i class="fas fa-book-medical text-3xl text-purple-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Digital Journal</h3>
+                <p class="text-slate-600 mb-4">
+                    Track your healing journey with mood analysis and progress insights.
+                </p>
+                <ul class="text-left text-slate-500 space-y-2">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Mood tracking</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Progress charts</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Private & secure</li>
+                </ul>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card glass-card p-8 text-center hover-lift">
+                <div
+                    class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center">
+                    <i class="fas fa-calendar-check text-3xl text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Recovery Plans</h3>
+                <p class="text-slate-600 mb-4">
+                    Personalized 7, 14, or 30-day recovery plans with daily activities.
+                </p>
+                <ul class="text-left text-slate-500 space-y-2">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Customized schedules</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Indian context</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Milestone tracking</li>
+                </ul>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card glass-card p-8 text-center hover-lift">
+                <div
+                    class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center">
+                    <i class="fas fa-users text-3xl text-green-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-4">Community Support</h3>
+                <p class="text-slate-600 mb-4">
+                    Connect with others on similar journeys in our moderated safe space.
+                </p>
+                <ul class="text-left text-slate-500 space-y-2">
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Anonymous sharing</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Group activities</li>
+                    <li><i class="fas fa-check text-green-500 mr-2"></i> Expert sessions</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="py-20 bg-gradient-to-b from-white to-rose-50">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-16">
+            <span class="gradient-text">3 Simple Steps to Healing</span>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div class="text-center relative">
+                <div
+                    class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-rose-500 to-pink-500 flex items-center justify-center text-white text-2xl font-bold">
+                    1
+                </div>
+                <h3 class="text-xl font-bold mb-4">Share Your Story</h3>
+                <p class="text-slate-600">
+                    Tell us about your experience. Our AI understands cultural context and emotional nuances.
+                </p>
+                <div class="absolute top-10 right-0 hidden md:block">
+                    <i class="fas fa-arrow-right text-2xl text-rose-400"></i>
+                </div>
+            </div>
+
+            <div class="text-center relative">
+                <div
+                    class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-purple-500 to-violet-500 flex items-center justify-center text-white text-2xl font-bold">
+                    2
+                </div>
+                <h3 class="text-xl font-bold mb-4">Get Personalized Plan</h3>
+                <p class="text-slate-600">
+                    Receive AI-generated recovery strategies, closure exercises, and daily plans.
+                </p>
+                <div class="absolute top-10 right-0 hidden md:block">
+                    <i class="fas fa-arrow-right text-2xl text-purple-400"></i>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <div
+                    class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white text-2xl font-bold">
+                    3
+                </div>
+                <h3 class="text-xl font-bold mb-4">Track & Heal</h3>
+                <p class="text-slate-600">
+                    Use journal, mood tracker, and community support to monitor your healing journey.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Input Form -->
+<section class="py-20">
+    <div class="container mx-auto px-6 max-w-4xl">
+        <div class="glass-card p-8 md:p-12">
+            <h2 class="text-3xl font-bold text-center mb-8">
+                Ready to Start Your Healing Journey?
+            </h2>
+
+            <form method="POST" action="{{ url_for('generate_plan') }}" class="space-y-6">
+                <!-- Story Input -->
+                <div>
+                    <label class="block text-lg font-semibold mb-3 text-slate-700">
+                        <i class="fas fa-heart mr-2 text-rose-500"></i>
+                        Share Your Story
+                    </label>
+                    <textarea name="user_input" rows="6" class="form-input auto-resize"
+                        placeholder="Describe your situation, feelings, and what you're hoping to achieve... (Your privacy is protected)"
+                        required></textarea>
+                </div>
+
+                <!-- Plan Type -->
+                <div>
+                    <label class="block text-lg font-semibold mb-3 text-slate-700">
+                        <i class="fas fa-calendar-alt mr-2 text-purple-500"></i>
+                        Recovery Plan Duration
+                    </label>
+                    <div class="grid grid-cols-3 gap-4">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="plan_type" value="7day" class="hidden peer" checked>
+                            <div
+                                class="p-4 text-center rounded-lg border-2 border-slate-200 peer-checked:border-rose-500 peer-checked:bg-rose-50 transition-all">
+                                <div class="font-bold text-slate-800">7-Day</div>
+                                <div class="text-sm text-slate-500">Quick Start</div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="plan_type" value="14day" class="hidden peer">
+                            <div
+                                class="p-4 text-center rounded-lg border-2 border-slate-200 peer-checked:border-purple-500 peer-checked:bg-purple-50 transition-all">
+                                <div class="font-bold text-slate-800">14-Day</div>
+                                <div class="text-sm text-slate-500">Balanced</div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="plan_type" value="30day" class="hidden peer">
+                            <div
+                                class="p-4 text-center rounded-lg border-2 border-slate-200 peer-checked:border-indigo-500 peer-checked:bg-indigo-50 transition-all">
+                                <div class="font-bold text-slate-800">30-Day</div>
+                                <div class="text-sm text-slate-500">Deep Healing</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Mood Selector -->
+                <div>
+                    <label class="block text-lg font-semibold mb-3 text-slate-700">
+                        <i class="fas fa-smile mr-2 text-yellow-500"></i>
+                        How are you feeling today?
+                    </label>
+                    <div class="flex flex-wrap gap-3 mood-selector">
+                        <div class="mood-option p-3 rounded-lg cursor-pointer border-2 border-slate-200 hover:border-green-500"
+                            data-mood="happy">
+                            <i class="fas fa-smile text-2xl text-green-500 mb-2"></i>
+                            <div class="font-medium">Hopeful</div>
+                        </div>
+                        <div class="mood-option p-3 rounded-lg cursor-pointer border-2 border-slate-200 hover:border-yellow-500"
+                            data-mood="neutral">
+                            <i class="fas fa-meh text-2xl text-yellow-500 mb-2"></i>
+                            <div class="font-medium">Neutral</div>
+                        </div>
+                        <div class="mood-option active p-3 rounded-lg cursor-pointer border-2 border-rose-500 bg-rose-50"
+                            data-mood="sad">
+                            <i class="fas fa-sad-tear text-2xl text-rose-500 mb-2"></i>
+                            <div class="font-medium">Sad</div>
+                        </div>
+                        <div class="mood-option p-3 rounded-lg cursor-pointer border-2 border-slate-200 hover:border-red-500"
+                            data-mood="angry">
+                            <i class="fas fa-angry text-2xl text-red-500 mb-2"></i>
+                            <div class="font-medium">Angry</div>
+                        </div>
+                        <div class="mood-option p-3 rounded-lg cursor-pointer border-2 border-slate-200 hover:border-purple-500"
+                            data-mood="confused">
+                            <i class="fas fa-question-circle text-2xl text-purple-500 mb-2"></i>
+                            <div class="font-medium">Confused</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="moodInput" name="mood" value="sad">
+                </div>
+
+                <!-- Image Upload -->
+                <div>
+                    <label class="block text-lg font-semibold mb-3 text-slate-700">
+                        <i class="fas fa-images mr-2 text-blue-500"></i>
+                        Add Images (Optional)
+                    </label>
+                    <div
+                        class="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center hover:border-rose-400 transition-colors">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-slate-400 mb-4"></i>
+                        <p class="text-slate-600 mb-2">Drag & drop images or click to browse</p>
+                        <p class="text-sm text-slate-500 mb-4">Supports JPG, PNG, GIF (max 5MB each)</p>
+                        <input type="file" name="images" multiple accept="image/*" class="hidden" id="imageUpload">
+                        <label for="imageUpload" class="btn-outline cursor-pointer">
+                            <i class="fas fa-folder-open mr-2"></i> Choose Files
+                        </label>
+                    </div>
+                    <div id="imagePreview" class="mt-4 grid grid-cols-4 gap-2 hidden"></div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-primary w-full text-lg py-5 rounded-2xl shadow-xl shadow-rose-200">
+                    <i class="fas fa-magic mr-2"></i> Generate My Healing Plan
+                </button>
+
+                <p class="text-center text-slate-500 text-sm mt-4">
+                    <i class="fas fa-lock mr-1"></i> Your data is encrypted and never shared
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-16">
+            <span class="gradient-text">Stories of Healing</span>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for testimonial in [
+            {"name": "Priya S.", "city": "Mumbai", "text": "The AI therapist understood my cultural context better than
+            any app I've tried.", "days": 45},
+            {"name": "Rahul K.", "city": "Delhi", "text": "The 30-day plan transformed my life. I'm now starting a new
+            business!", "days": 90},
+            {"name": "Ananya P.", "city": "Bangalore", "text": "The community support kept me going on tough days.
+            Forever grateful.", "days": 60}
+            ] %}
+            <div class="testimonial-card rounded-2xl p-6 border border-slate-100">
+                <div class="flex items-center mb-4">
+                    <img src="https://ui-avatars.com/api/?name={{ testimonial.name }}&background=rose-500&color=fff"
+                        class="w-12 h-12 rounded-full mr-4">
+                    <div>
+                        <div class="font-bold">{{ testimonial.name }}</div>
+                        <div class="text-slate-500 text-sm">{{ testimonial.city }} • {{ testimonial.days }} days healing
+                        </div>
+                    </div>
+                </div>
+                <p class="text-slate-700 mb-4 italic">"{{ testimonial.text }}"</p>
+                <div class="flex text-rose-400">
+                    {% for i in range(5) %}
+                    <i class="fas fa-star"></i>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Emergency Section -->
+<section class="py-12 bg-gradient-to-r from-rose-600 to-pink-600 text-white">
+    <div class="container mx-auto px-6 text-center">
+        <h3 class="text-2xl font-bold mb-4">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            Need Immediate Help?
+        </h3>
+        <p class="mb-6 max-w-2xl mx-auto">
+            If you're in crisis or having thoughts of self-harm, please contact these Indian helplines immediately:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+            <a href="tel:18602662345"
+                class="bg-white text-rose-600 px-6 py-3 rounded-lg font-bold hover:bg-rose-50 transition">
+                <i class="fas fa-phone mr-2"></i> Vandrevala: 1860-266-2345
+            </a>
+            <a href="tel:9152987821"
+                class="bg-white text-rose-600 px-6 py-3 rounded-lg font-bold hover:bg-rose-50 transition">
+                <i class="fas fa-phone mr-2"></i> iCall: 9152987821
+            </a>
+            <a href="tel:1098"
+                class="bg-white text-rose-600 px-6 py-3 rounded-lg font-bold hover:bg-rose-50 transition">
+                <i class="fas fa-phone mr-2"></i> Childline: 1098
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Image upload preview
+    document.getElementById('imageUpload').addEventListener('change', function (e) {
+        const preview = document.getElementById('imagePreview');
+        preview.innerHTML = '';
+        preview.classList.remove('hidden');
+
+        Array.from(e.target.files).forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const div = document.createElement('div');
+                div.className = 'relative';
+                div.innerHTML = `
+                    <img src="${e.target.result}" class="w-full h-24 object-cover rounded-lg">
+                    <button type="button" class="absolute -top-2 -right-2 bg-rose-500 text-white w-6 h-6 rounded-full text-sm">
+                        ×
+                    </button>
+                `;
+                preview.appendChild(div);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+
+    // Form validation and loading state
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const textarea = this.querySelector('textarea');
+        if (textarea.value.trim().length < 10) {
+            e.preventDefault();
+            alert('Please share more about your experience (at least 10 characters)');
+            return;
+        }
+
+        // Show loading state
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+            <svg class="animate-spin inline-block h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Generating Your Healing Plan...
+        `;
+
+        // Add a timeout to restore button if something goes wrong
+        setTimeout(() => {
+            if (submitBtn.disabled) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        }, 30000); // 30 seconds max
+    });
+</script>
+{% endblock %}

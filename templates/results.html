@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+
+{% block title %}Your Healing Plan - Healing Horizons{% endblock %}
+
+{% block extra_css %}
+<style>
+    .markdown-content {
+        line-height: 1.8;
+    }
+
+    .markdown-content h1,
+    .markdown-content h2,
+    .markdown-content h3 {
+        font-weight: 700;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        color: #1e293b;
+    }
+
+    .markdown-content h2 {
+        font-size: 1.5rem;
+        border-bottom: 2px solid #f1f5f9;
+        padding-bottom: 0.5rem;
+    }
+
+    .markdown-content h3 {
+        font-size: 1.25rem;
+        color: #475569;
+    }
+
+    .markdown-content p {
+        margin-bottom: 1rem;
+    }
+
+    .markdown-content ul,
+    .markdown-content ol {
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .markdown-content li {
+        margin-bottom: 0.5rem;
+    }
+
+    .markdown-content strong {
+        font-weight: 600;
+        color: #0f172a;
+    }
+
+    .markdown-content em {
+        font-style: italic;
+        color: #64748b;
+    }
+
+    .markdown-content blockquote {
+        border-left: 4px solid #e2e8f0;
+        padding-left: 1rem;
+        margin: 1rem 0;
+        font-style: italic;
+        color: #64748b;
+    }
+
+    .markdown-content code {
+        background: #f1f5f9;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.25rem;
+        font-size: 0.9em;
+        font-family: 'Courier New', monospace;
+    }
+
+    .agent-card {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .agent-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .agent-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--card-color-start), var(--card-color-end));
+    }
+
+    @media print {
+        .no-print {
+            display: none;
+        }
+
+        .agent-card {
+            page-break-inside: avoid;
+            box-shadow: none;
+            border: 1px solid #e2e8f0;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-6 py-12">
+    <!-- Header -->
+    <div class="text-center mb-12 animate-slide-down">
+        <div class="inline-block mb-4">
+            <span
+                class="px-4 py-2 bg-gradient-to-r from-rose-100 to-purple-100 text-rose-700 rounded-full text-sm font-semibold">
+                ✨ Personalized for You
+            </span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+            <span class="gradient-text">Your Healing Journey Begins</span>
+        </h1>
+        <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+            Four expert perspectives to guide your recovery. Take what resonates, and remember—healing is not linear.
+        </p>
+    </div>
+
+    <!-- Agent Responses Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+
+        <!-- Therapist Agent -->
+        <div class="agent-card glass-card p-8 animate-slide-up-fade"
+            style="--card-color-start: #f43f5e; --card-color-end: #ec4899; animation-delay: 0.1s">
+            <div class="flex items-center mb-6">
+                <div
+                    class="w-16 h-16 rounded-2xl bg-gradient-to-br from-rose-100 to-pink-100 flex items-center justify-center mr-4 shadow-sm">
+                    <i class="fas fa-user-md text-3xl text-rose-600"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800">Dr. Ananya Sharma</h3>
+                    <p class="text-sm text-rose-600 font-medium">Empathetic Therapist</p>
+                </div>
+            </div>
+            <div class="markdown-content text-slate-700">
+                {{ responses.therapist | markdown | safe }}
+            </div>
+        </div>
+
+        <!-- Recovery Planner -->
+        <div class="agent-card glass-card p-8 animate-slide-up-fade"
+            style="--card-color-start: #8b5cf6; --card-color-end: #a855f7; animation-delay: 0.2s">
+            <div class="flex items-center mb-6">
+                <div
+                    class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-100 to-violet-100 flex items-center justify-center mr-4 shadow-sm">
+                    <i class="fas fa-calendar-check text-3xl text-purple-600"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800">Recovery Planner</h3>
+                    <p class="text-sm text-purple-600 font-medium">Actionable Steps</p>
+                </div>
+            </div>
+            <div class="markdown-content text-slate-700">
+                {{ responses.planner | markdown | safe }}
+            </div>
+        </div>
+
+        <!-- Closure Specialist -->
+        <div class="agent-card glass-card p-8 animate-slide-up-fade"
+            style="--card-color-start: #3b82f6; --card-color-end: #06b6d4; animation-delay: 0.3s">
+            <div class="flex items-center mb-6">
+                <div
+                    class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center mr-4 shadow-sm">
+                    <i class="fas fa-feather-alt text-3xl text-blue-600"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800">Closure Specialist</h3>
+                    <p class="text-sm text-blue-600 font-medium">Letting Go Rituals</p>
+                </div>
+            </div>
+            <div class="markdown-content text-slate-700">
+                {{ responses.closure | markdown | safe }}
+            </div>
+        </div>
+
+        <!-- Brutal Honesty Coach -->
+        <div class="agent-card glass-card p-8 animate-slide-up-fade"
+            style="--card-color-start: #475569; --card-color-end: #64748b; animation-delay: 0.4s">
+            <div class="flex items-center mb-6">
+                <div
+                    class="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-100 to-gray-100 flex items-center justify-center mr-4 shadow-sm">
+                    <i class="fas fa-gavel text-3xl text-slate-700"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800">Reality Check</h3>
+                    <p class="text-sm text-slate-600 font-medium">Brutal Honesty Coach</p>
+                </div>
+            </div>
+            <div class="markdown-content text-slate-700">
+                {{ responses.honesty | markdown | safe }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Motivational Quote -->
+    <div class="glass-card p-8 mb-12 text-center bg-gradient-to-r from-rose-50 to-purple-50 border-l-4 border-rose-500 animate-slide-up-fade"
+        style="animation-delay: 0.5s">
+        <i class="fas fa-quote-left text-3xl text-rose-400 mb-4"></i>
+        <p class="text-xl font-medium text-slate-700 italic mb-2">
+            "Healing doesn't mean the damage never existed. It means the damage no longer controls your life."
+        </p>
+        <p class="text-sm text-slate-500">— You've got this 💪</p>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex flex-col sm:flex-row justify-center gap-4 animate-slide-up-fade no-print"
+        style="animation-delay: 0.6s">
+        <a href="{{ url_for('journal') }}"
+            class="btn-primary text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
+            <i class="fas fa-book mr-2"></i> Start Journaling
+        </a>
+        <a href="{{ url_for('dashboard') }}"
+            class="btn-outline text-lg px-8 py-4 rounded-xl transform hover:-translate-y-1 transition-all">
+            <i class="fas fa-chart-line mr-2"></i> View Dashboard
+        </a>
+        <button onclick="window.print()"
+            class="btn-outline text-lg px-8 py-4 rounded-xl transform hover:-translate-y-1 transition-all">
+            <i class="fas fa-print mr-2"></i> Print Plan
+        </button>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="mt-12 text-center animate-slide-up-fade" style="animation-delay: 0.7s">
+        <p class="text-slate-600 mb-4">
+            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+            Remember: This is a starting point. Your healing journey is unique to you.
+        </p>
+        <a href="{{ url_for('resources') }}" class="text-rose-600 hover:text-rose-700 font-medium underline">
+            Explore Additional Resources →
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Smooth scroll animations
+    document.addEventListener('DOMContentLoaded', () => {
+        // Add fade-in effect to cards as they come into view
+        const cards = document.querySelectorAll('.agent-card');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+    });
+</script>
+{% endblock %}

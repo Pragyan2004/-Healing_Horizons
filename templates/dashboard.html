@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Healing Progress{% endblock %}
+
+{% block extra_css %}
+<style>
+    .stat-card {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .stat-card:hover::before {
+        left: 100%;
+    }
+
+    .journal-preview {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .journal-preview:hover {
+        transform: translateX(8px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div class="container mx-auto px-6 py-12">
+        <!-- Welcome Section -->
+        <div class="mb-12 animate-slide-down">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4">
+                Welcome back, <span class="gradient-text">{{ current_user.username }}</span>! 👋
+            </h1>
+            <p class="text-xl text-slate-600 mb-6">
+                You're on day <span class="font-bold text-rose-600">{{ stats.days_active }}</span> of your healing
+                journey.
+                {% if stats.current_streak > 0 %}
+                You're on a <span class="font-bold text-purple-600">{{ stats.current_streak }}-day streak</span>! 🔥
+                {% endif %}
+            </p>
+
+            <!-- Affirmation Card -->
+            <div
+                class="glass-card p-8 bg-gradient-to-br from-rose-500 via-pink-500 to-purple-600 text-white border-none relative overflow-hidden group max-w-3xl animate-slide-up-fade">
+                <div
+                    class="absolute -right-10 -top-10 w-40 h-40 bg-white opacity-10 rounded-full group-hover:scale-150 transition-transform duration-700">
+                </div>
+                <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-white opacity-10 rounded-full group-hover:scale-150 transition-transform duration-700"
+                    style="animation-delay: 0.2s"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-quote-left text-3xl opacity-50 mr-3"></i>
+                        <span class="text-xs uppercase tracking-widest opacity-90 font-bold">Today's Affirmation</span>
+                    </div>
+                    <p class="text-2xl md:text-3xl font-medium leading-relaxed mb-4">
+                        {{ affirmation }}
+                    </p>
+                    <div class="flex items-center text-sm opacity-90">
+                        <i class="fas fa-heart mr-2 animate-pulse"></i>
+                        <span>Believe in yourself</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="stat-card glass-card p-6 hover-lift animate-slide-up-fade" style="animation-delay: 0.1s">
+                <div class="flex items-center justify-between mb-4">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-400 to-rose-600 flex items-center justify-center shadow-lg">
+                        <i class="fas fa-calendar-check text-2xl text-white"></i>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold gradient-text">{{ stats.days_active }}</div>
+                        <div class="text-slate-500 text-sm font-medium">Days Active</div>
+                    </div>
+                </div>
+                <div class="h-1 bg-gradient-to-r from-rose-400 to-rose-600 rounded-full"></div>
+            </div>
+
+            <div class="stat-card glass-card p-6 hover-lift animate-slide-up-fade" style="animation-delay: 0.2s">
+                <div class="flex items-center justify-between mb-4">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center shadow-lg">
+                        <i class="fas fa-fire text-2xl text-white"></i>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold gradient-text">{{ stats.current_streak }}</div>
+                        <div class="text-slate-500 text-sm font-medium">Day Streak</div>
+                    </div>
+                </div>
+                <div class="h-1 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full"></div>
+            </div>
+
+            <div class="stat-card glass-card p-6 hover-lift animate-slide-up-fade" style="animation-delay: 0.3s">
+                <div class="flex items-center justify-between mb-4">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-lg">
+                        <i class="fas fa-book text-2xl text-white"></i>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold gradient-text">{{ stats.total_entries }}</div>
+                        <div class="text-slate-500 text-sm font-medium">Entries</div>
+                    </div>
+                </div>
+                <div class="h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"></div>
+            </div>
+
+            <div class="stat-card glass-card p-6 hover-lift animate-slide-up-fade" style="animation-delay: 0.4s">
+                <div class="flex items-center justify-between mb-4">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg">
+                        <i class="fas fa-smile text-2xl text-white"></i>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xl font-bold gradient-text">{{ stats.most_common_mood }}</div>
+                        <div class="text-slate-500 text-sm font-medium">Top Mood</div>
+                    </div>
+                </div>
+                <div class="h-1 bg-gradient-to-r from-green-400 to-green-600 rounded-full"></div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div class="glass-card p-8 animate-slide-up-fade" style="animation-delay: 0.5s">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-bold text-slate-800">Mood Trend</h3>
+                    <div class="px-3 py-1 bg-rose-100 text-rose-600 rounded-full text-xs font-bold">7 DAYS</div>
+                </div>
+                <div class="relative" style="height: 280px;">
+                    <canvas id="moodChart"></canvas>
+                </div>
+            </div>
+
+            <div class="glass-card p-8 animate-slide-up-fade" style="animation-delay: 0.6s">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-bold text-slate-800">Recovery Progress</h3>
+                    <div class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-xs font-bold">OVERVIEW</div>
+                </div>
+                <div class="relative" style="height: 280px;">
+                    <canvas id="progressChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Journal Entries -->
+        <div class="glass-card p-8 animate-slide-up-fade" style="animation-delay: 0.7s">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h3 class="text-3xl font-bold text-slate-800 mb-2">Recent Reflections</h3>
+                    <p class="text-slate-600">Your latest journal entries</p>
+                </div>
+                <a href="{{ url_for('journal') }}"
+                    class="px-6 py-3 bg-gradient-to-r from-rose-600 to-pink-600 text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all">
+                    <i class="fas fa-book mr-2"></i> View All
+                </a>
+            </div>
+
+            {% if entries %}
+            <div class="space-y-4">
+                {% for entry in entries %}
+                <div class="journal-preview p-6 rounded-2xl border-2 border-slate-100 hover:border-rose-200 bg-white">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-gradient-to-br from-{{ 'rose' if entry.mood == 'happy' else 'blue' if entry.mood == 'neutral' else 'slate' }}-400 to-{{ 'pink' if entry.mood == 'happy' else 'indigo' if entry.mood == 'neutral' else 'gray' }}-600 flex items-center justify-center mr-4 shadow-md">
+                                <i
+                                    class="fas fa-{{ 'smile' if entry.mood == 'happy' else 'meh' if entry.mood == 'neutral' else 'sad-tear' if entry.mood == 'sad' else 'heartbeat' if entry.mood == 'anxious' else 'sun' }} text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-lg text-slate-800">{{ entry.mood|title }}</div>
+                                <div class="text-sm text-slate-500">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    {{ entry.created_at.strftime('%B %d, %Y at %I:%M %p') }}
+                                </div>
+                            </div>
+                        </div>
+                        {% if entry.tags %}
+                        <div class="flex flex-wrap gap-2">
+                            {% for tag in entry.tags.split(',')[:2] %}
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold">
+                                {{ tag.strip() }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <p class="text-slate-700 leading-relaxed line-clamp-2">
+                        {{ entry.content[:180] }}{% if entry.content|length > 180 %}...{% endif %}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-16">
+                <div
+                    class="w-24 h-24 rounded-full bg-gradient-to-br from-rose-100 to-purple-100 flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-book-open text-4xl text-rose-600"></i>
+                </div>
+                <h4 class="text-2xl font-bold text-slate-800 mb-3">No entries yet</h4>
+                <p class="text-slate-600 mb-6 max-w-md mx-auto">
+                    Start your healing journey by writing your first journal entry. It's a safe space just for you.
+                </p>
+                <a href="{{ url_for('journal') }}"
+                    class="inline-block px-8 py-4 bg-gradient-to-r from-rose-600 to-pink-600 text-white rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
+                    <i class="fas fa-pen mr-2"></i> Write First Entry
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of Service - Healing Horizons{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div class="container mx-auto px-6 py-16 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-12 animate-slide-down">
+            <div class="inline-block px-4 py-2 bg-purple-100 text-purple-600 rounded-full text-sm font-bold mb-4">
+                LEGAL
+            </div>
+            <h1 class="text-5xl font-bold mb-4">
+                <span class="gradient-text">Terms of Service</span>
+            </h1>
+            <p class="text-slate-600">Last updated: {{ current_date }}</p>
+        </div>
+
+        <!-- Content -->
+        <div class="glass-card p-8 md:p-12 prose prose-slate max-w-none">
+            <div class="mb-8 p-6 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-lg">
+                <p class="text-slate-700 font-medium mb-0">
+                    <i class="fas fa-info-circle text-yellow-600 mr-2"></i>
+                    By using Healing Horizons, you agree to these terms. Please read them carefully.
+                </p>
+            </div>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">1. Acceptance of Terms</h2>
+            <p class="text-slate-600 mb-4">
+                By accessing and using Healing Horizons, you accept and agree to be bound by these Terms of Service and
+                our Privacy Policy. If you disagree with any part, please do not use our service.
+            </p>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">2. Service Description</h2>
+            <p class="text-slate-600 mb-4">Healing Horizons provides:</p>
+            <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                <li>AI-powered emotional support and recovery planning</li>
+                <li>Digital journaling with mood tracking</li>
+                <li>Access to mental health resources in India</li>
+                <li>Community support features</li>
+            </ul>
+
+            <div class="bg-rose-50 p-6 rounded-xl border border-rose-200 my-6">
+                <h4 class="font-bold text-rose-800 mb-2">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>Important Disclaimer
+                </h4>
+                <p class="text-slate-700 text-sm mb-0">
+                    <strong>Healing Horizons is NOT a substitute for professional medical or psychological
+                        treatment.</strong> Our AI provides support and guidance, but does not replace licensed
+                    therapists, counselors, or medical professionals. If you're experiencing a mental health crisis,
+                    please contact emergency services or a crisis hotline immediately.
+                </p>
+            </div>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">3. User Responsibilities</h2>
+            <p class="text-slate-600 mb-4">You agree to:</p>
+            <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                <li>Provide accurate information when using our service</li>
+                <li>Keep your account credentials secure</li>
+                <li>Use the platform respectfully and lawfully</li>
+                <li>Not share harmful, abusive, or illegal content</li>
+                <li>Seek professional help when needed</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">4. Intellectual Property</h2>
+            <p class="text-slate-600 mb-4">
+                All content, features, and functionality on Healing Horizons are owned by us and protected by
+                international copyright, trademark, and other intellectual property laws. You may not reproduce,
+                distribute, or create derivative works without our express written permission.
+            </p>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">5. User-Generated Content</h2>
+            <p class="text-slate-600 mb-4">
+                You retain ownership of your journal entries and personal content. By using our service, you grant us a
+                limited license to:
+            </p>
+            <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                <li>Store and process your content to provide services</li>
+                <li>Use anonymized, aggregated data to improve our AI</li>
+                <li>Display your content back to you across devices</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">6. Prohibited Activities</h2>
+            <p class="text-slate-600 mb-4">You may NOT:</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="p-4 bg-red-50 rounded-lg border border-red-100">
+                    <p class="text-sm text-slate-700"><i class="fas fa-times-circle text-red-600 mr-2"></i>Attempt to
+                        hack or breach security</p>
+                </div>
+                <div class="p-4 bg-red-50 rounded-lg border border-red-100">
+                    <p class="text-sm text-slate-700"><i class="fas fa-times-circle text-red-600 mr-2"></i>Harass or
+                        abuse other users</p>
+                </div>
+                <div class="p-4 bg-red-50 rounded-lg border border-red-100">
+                    <p class="text-sm text-slate-700"><i class="fas fa-times-circle text-red-600 mr-2"></i>Scrape or
+                        copy our content</p>
+                </div>
+                <div class="p-4 bg-red-50 rounded-lg border border-red-100">
+                    <p class="text-sm text-slate-700"><i class="fas fa-times-circle text-red-600 mr-2"></i>Impersonate
+                        others</p>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">7. Limitation of Liability</h2>
+            <p class="text-slate-600 mb-4">
+                To the fullest extent permitted by law, Healing Horizons shall not be liable for any indirect,
+                incidental, special, consequential, or punitive damages resulting from your use of the service.
+            </p>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">8. Service Modifications</h2>
+            <p class="text-slate-600 mb-4">
+                We reserve the right to modify, suspend, or discontinue any part of our service at any time. We'll
+                provide reasonable notice for significant changes.
+            </p>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">9. Termination</h2>
+            <p class="text-slate-600 mb-4">
+                We may terminate or suspend your access immediately, without prior notice, for conduct that we believe
+                violates these Terms or is harmful to other users, us, or third parties.
+            </p>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">10. Governing Law</h2>
+            <p class="text-slate-600 mb-4">
+                These Terms shall be governed by and construed in accordance with the laws of India, without regard to
+                its conflict of law provisions.
+            </p>
+
+            <div class="mt-12 p-6 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl border border-purple-200">
+                <h3 class="text-xl font-bold text-slate-800 mb-3">
+                    <i class="fas fa-question-circle text-purple-600 mr-2"></i>Questions About These Terms?
+                </h3>
+                <p class="text-slate-600 mb-4">
+                    Our team is here to clarify anything you need.
+                </p>
+                <a href="{{ url_for('contact') }}"
+                    class="inline-block px-6 py-3 bg-purple-600 text-white rounded-lg font-bold hover:bg-purple-700 transition-colors">
+                    Contact Legal Team
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

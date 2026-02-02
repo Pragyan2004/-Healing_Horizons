@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - Healing Horizons{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div class="container mx-auto px-6 py-16 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-12 animate-slide-down">
+            <div class="inline-block px-4 py-2 bg-rose-100 text-rose-600 rounded-full text-sm font-bold mb-4">
+                LEGAL
+            </div>
+            <h1 class="text-5xl font-bold mb-4">
+                <span class="gradient-text">Privacy Policy</span>
+            </h1>
+            <p class="text-slate-600">Last updated: {{ current_date }}</p>
+        </div>
+
+        <!-- Content -->
+        <div class="glass-card p-8 md:p-12 prose prose-slate max-w-none">
+            <div class="mb-8 p-6 bg-rose-50 border-l-4 border-rose-500 rounded-r-lg">
+                <p class="text-slate-700 font-medium mb-0">
+                    <i class="fas fa-shield-alt text-rose-600 mr-2"></i>
+                    Your privacy is sacred to us. This policy explains how we protect and handle your personal
+                    information.
+                </p>
+            </div>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">1. Information We Collect</h2>
+            <p class="text-slate-600 mb-4">We collect information to provide you with the best healing experience:</p>
+            <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                <li><strong>Account Information:</strong> Username and email (for guest accounts, minimal data)</li>
+                <li><strong>Journal Entries:</strong> Your personal reflections and mood tracking data</li>
+                <li><strong>Usage Data:</strong> How you interact with our platform to improve services</li>
+                <li><strong>Recovery Progress:</strong> Mood scores and healing milestones</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">2. How We Use Your Information</h2>
+            <p class="text-slate-600 mb-4">Your data powers your healing journey:</p>
+            <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                <li>Provide personalized AI-driven recovery plans and insights</li>
+                <li>Track your progress and suggest relevant resources</li>
+                <li>Improve our AI models (with anonymized, aggregated data only)</li>
+                <li>Send important updates about your healing journey</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">3. Data Security</h2>
+            <div class="bg-purple-50 p-6 rounded-xl border border-purple-100 mb-4">
+                <p class="text-slate-700 mb-3">
+                    <i class="fas fa-lock text-purple-600 mr-2"></i>
+                    <strong>Industry-Leading Protection:</strong>
+                </p>
+                <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                    <li>256-bit AES encryption for all data at rest</li>
+                    <li>TLS 1.3 encryption for data in transit</li>
+                    <li>Regular security audits and penetration testing</li>
+                    <li>Secure cloud infrastructure with automatic backups</li>
+                </ul>
+            </div>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">4. Data Sharing</h2>
+            <p class="text-slate-600 mb-4">
+                <strong class="text-rose-600">We NEVER sell your personal data.</strong> We only share information in
+                these limited cases:
+            </p>
+            <ul class="list-disc pl-6 text-slate-600 space-y-2">
+                <li><strong>With Your Consent:</strong> When you explicitly authorize sharing</li>
+                <li><strong>Service Providers:</strong> Trusted partners who help us operate (under strict NDAs)</li>
+                <li><strong>Legal Requirements:</strong> When required by law or to protect safety</li>
+                <li><strong>Anonymized Research:</strong> Aggregated, non-identifiable data for mental health research
+                </li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">5. Your Rights</h2>
+            <p class="text-slate-600 mb-4">You have complete control over your data:</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="p-4 bg-blue-50 rounded-lg border border-blue-100">
+                    <h4 class="font-bold text-slate-800 mb-2"><i class="fas fa-download text-blue-600 mr-2"></i>Access &
+                        Export</h4>
+                    <p class="text-sm text-slate-600">Download all your data anytime</p>
+                </div>
+                <div class="p-4 bg-green-50 rounded-lg border border-green-100">
+                    <h4 class="font-bold text-slate-800 mb-2"><i class="fas fa-edit text-green-600 mr-2"></i>Modify</h4>
+                    <p class="text-sm text-slate-600">Update your information easily</p>
+                </div>
+                <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-100">
+                    <h4 class="font-bold text-slate-800 mb-2"><i class="fas fa-trash text-yellow-600 mr-2"></i>Delete
+                    </h4>
+                    <p class="text-sm text-slate-600">Remove your data permanently</p>
+                </div>
+                <div class="p-4 bg-purple-50 rounded-lg border border-purple-100">
+                    <h4 class="font-bold text-slate-800 mb-2"><i class="fas fa-ban text-purple-600 mr-2"></i>Opt-Out
+                    </h4>
+                    <p class="text-sm text-slate-600">Control communications</p>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">6. Cookies & Tracking</h2>
+            <p class="text-slate-600 mb-4">
+                We use minimal cookies to enhance your experience. You can control cookie preferences in your browser
+                settings.
+            </p>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">7. Children's Privacy</h2>
+            <p class="text-slate-600 mb-4">
+                Our service is not intended for users under 13. If you're a parent and believe your child has provided
+                us with information, please contact us immediately.
+            </p>
+
+            <h2 class="text-2xl font-bold text-slate-800 mt-8 mb-4">8. Changes to This Policy</h2>
+            <p class="text-slate-600 mb-4">
+                We may update this policy periodically. We'll notify you of significant changes via email or prominent
+                notice on our platform.
+            </p>
+
+            <div class="mt-12 p-6 bg-gradient-to-r from-rose-50 to-purple-50 rounded-xl border border-rose-200">
+                <h3 class="text-xl font-bold text-slate-800 mb-3">
+                    <i class="fas fa-envelope text-rose-600 mr-2"></i>Questions or Concerns?
+                </h3>
+                <p class="text-slate-600 mb-4">
+                    We're here to help. Contact our privacy team anytime:
+                </p>
+                <a href="{{ url_for('contact') }}"
+                    class="inline-block px-6 py-3 bg-rose-600 text-white rounded-lg font-bold hover:bg-rose-700 transition-colors">
+                    Contact Privacy Team
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
