@@ -69,7 +69,7 @@ def load_user(user_id):
 # ------------------------------
 def create_agents(api_key: str):
     """Create AI agents with enhanced instructions"""
-    model = Groq(id="llama-3.3-70b-versatile", api_key=api_key)
+    model = Groq(id="llama-3.1-8b-instant", api_key=api_key)
     
     therapist = Agent(
         model=model,
@@ -127,21 +127,41 @@ def create_agents(api_key: str):
     return therapist, closure, planner, honesty
 
 def analyze_mood(text):
-    """Simple mood analysis from text"""
-    positive_words = [
+    """Enhanced mood analysis from text"""
+    text_lower = text.lower()
+    
+    # Expanded keyword lists
+    positive_words = {
         'happy', 'better', 'improving', 'hope', 'healing', 'strong', 
         'good', 'great', 'awesome', 'excited', 'peace', 'calm',
-        'grateful', 'love', 'joy', 'confident', 'optimistic'
-    ]
-    negative_words = [
+        'grateful', 'love', 'joy', 'confident', 'optimistic',
+        'proud', 'won', 'success', 'growth', 'smile', 'laugh'
+    }
+    negative_words = {
         'sad', 'pain', 'hurt', 'lonely', 'depressed', 'angry', 
         'bad', 'worse', 'broken', 'confused', 'lost', 'tears',
-        'anxious', 'afraid', 'scared', 'hate', 'miss'
-    ]
+        'anxious', 'afraid', 'scared', 'hate', 'miss', 'crying',
+        'stuck', 'guilty', 'ashamed', 'regret', 'dark', 'tired'
+    }
     
-    text_lower = text.lower()
-    pos_count = sum(1 for word in positive_words if word in text_lower)
-    neg_count = sum(1 for word in negative_words if word in text_lower)
+    # Simple token-based scoring
+    # Remove punctuation for better matching
+    import string
+    translator = str.maketrans('', '', string.punctuation)
+    clean_text = text_lower.translate(translator)
+    
+    # Crisis detection (Priority)
+    crisis_keywords = {
+        'die', 'suicide', 'kill', 'end it', 'no point', 'give up', 
+        'death', 'hurt myself', 'tired of life', 'quit life', 'dead'
+    }
+    if any(keyword in clean_text for keyword in crisis_keywords):
+        return "crisis"
+        
+    words = clean_text.split()
+    
+    pos_count = sum(1 for word in words if word in positive_words)
+    neg_count = sum(1 for word in words if word in negative_words)
     
     if pos_count > neg_count:
         return "improving"
@@ -260,15 +280,33 @@ def dashboard():
         'days_active': days_active
     }
     
+    # Prepare chart data
+    chart_dates = []
+    chart_moods = []
+    chart_activity = []
+    
+    # Sort for chart (oldest to newest)
+    for p in sorted(progress_data, key=lambda x: x.date):
+        chart_dates.append(p.date.strftime('%b %d'))
+        chart_moods.append(p.mood_score or 0)
+        chart_activity.append(p.activity_score or 0)
+        
+    chart_data = {
+        'labels': chart_dates,
+        'moods': chart_moods,
+        'activity': chart_activity
+    }
+    
     return render_template('dashboard.html', 
                          entries=recent_entries,
                          progress=progress_data,
                          affirmation=daily_affirmation,
-                         stats=stats)
+                         stats=stats,
+                         chart_data=chart_data)
 
 @app.route('/analyze', methods=['POST'])
 def analyze():
-    """Main analysis endpoint with loading animation"""
+    """Main analysis endpoint with dynamic suggestions"""
     if not current_user.is_authenticated:
         return jsonify({'error': 'Not authenticated'}), 401
 
@@ -276,17 +314,42 @@ def analyze():
     user_input = data.get('text', '')
     mood = analyze_mood(user_input)
     
-    # Update user's recovery stage
-    current_user.recovery_stage = mood
-    db.session.commit()
+    # Context-aware suggestions based on mood
+    suggestions = {
+        'improving': [
+            'Celebrate this win - write down 3 things you did well',
+            'Share your positivity with a friend or in the community',
+            'Set a new goal while you are feeling strong'
+        ],
+        'struggling': [
+            'Be gentle with yourself, healing is non-linear',
+            'Try the 5-minute box breathing exercise now',
+            'Write a letter to yourself offering compassion'
+        ],
+        'neutral': [
+            'Take a moment to identify one small joy today',
+            'Go for a short walk to clear your mind',
+            'Practice mindfulness for 5 minutes'
+        ],
+        'crisis': [
+            'Please reach out for help immediately - you are not alone.',
+            'Call Vandrevala Foundation (India): 1860-266-2345 (24/7)',
+            'Call iCall Helpline: 9152987821 (Mon-Sat, 8 AM - 10 PM)'
+        ]
+    }
+    
+    # Update user's recovery stage if significant
+    if mood != 'neutral' and mood != 'crisis':
+        current_user.recovery_stage = mood
+        db.session.commit()
     
     return jsonify({
-        'mood': mood,
+        'mood': mood if mood != 'crisis' else 'Support Needed',
         'message': 'Analysis complete',
-        'next_steps': ['Write in journal', 'Try breathing exercise', 'Connect with support']
+        'next_steps': suggestions.get(mood, suggestions['neutral'])
     })
 
-@app.route('/generate_plan', methods=['POST'])
+@app.route('/generate_plan', methods=['GET', 'POST'])
 def generate_plan():
     """Generate recovery plan with AI - optimized for speed"""
     global RATE_LIMITED, RATE_LIMIT_RESET_TIME
@@ -484,7 +547,7 @@ You deserve someone who chooses you every single day without hesitation. This pe
         import concurrent.futures
         import json as json_module
         
-        def call_agent_with_timeout(agent_name, agent, prompt, timeout=3):
+        def call_agent_with_timeout(agent_name, agent, prompt, timeout=6):
             """Call agent with timeout protection and error parsing"""
             try:
                 with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -528,7 +591,7 @@ You deserve someone who chooses you every single day without hesitation. This pe
         
         # Try all agents with timeout
         for agent_name, agent, prompt in agents_config:
-            name, content, error = call_agent_with_timeout(agent_name, agent, prompt, timeout=3)
+            name, content, error = call_agent_with_timeout(agent_name, agent, prompt, timeout=6)
             
             if content:
                 # Success! Validate it's not an error JSON
@@ -576,6 +639,7 @@ You deserve someone who chooses you every single day without hesitation. This pe
         
     except Exception as e:
         # If agent creation fails, use complete fallback immediately
+        print(f"Global error in generate_plan: {str(e)}") # Log for debugging
         error_msg = str(e).lower()
         is_rate_limit = any(keyword in error_msg for keyword in [
             'rate', 'limit', 'quota', 'exceeded', 'ratelimit', 
@@ -588,7 +652,8 @@ You deserve someone who chooses you every single day without hesitation. This pe
             RATE_LIMIT_RESET_TIME = datetime.now() + timedelta(hours=1)
             flash('⚠️ AI service has reached daily limit. Showing expertly crafted recovery guidance.', 'warning')
         else:
-            flash('⚠️ Service temporarily unavailable. Showing expertly crafted recovery guidance.', 'warning')
+            # For connection errors or other issues
+            flash('⚠️ Showing expertly crafted recovery guidance (AI connection unavailable).', 'info')
         
         responses = get_fallback_responses(user_input, plan_type)
         session['last_responses'] = responses
@@ -630,6 +695,20 @@ def journal():
         .order_by(JournalEntry.created_at.desc()).all()
     
     return render_template('journal.html', entries=entries)
+
+@app.route('/delete_entry/<int:entry_id>', methods=['POST'])
+@login_required
+def delete_entry(entry_id):
+    """Delete a journal entry"""
+    entry = JournalEntry.query.get_or_404(entry_id)
+    if entry.user_id != current_user.id:
+        flash('Unauthorized action', 'error')
+        return redirect(url_for('journal'))
+    
+    db.session.delete(entry)
+    db.session.commit()
+    flash('Entry deleted successfully', 'success')
+    return redirect(request.referrer or url_for('dashboard'))
 
 @app.route('/resources')
 def resources():

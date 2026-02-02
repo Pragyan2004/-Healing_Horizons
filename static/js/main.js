@@ -258,8 +258,8 @@ class HealingHorizonsApp {
         const textarea = document.querySelector('textarea[name="content"]');
         const content = textarea.value.trim();
 
-        if (content.length < 5) {
-            this.showToast('Please write a bit more first...', 'info');
+        if (content.length < 2) {
+            this.showToast('Please type something to analyze...', 'info');
             return;
         }
 

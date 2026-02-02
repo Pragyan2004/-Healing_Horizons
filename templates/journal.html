@@ -44,9 +44,18 @@
 
                     <!-- Tags -->
                     <div>
-                        <label class="block font-medium mb-3">Tags (comma separated):</label>
-                        <input type="text" name="tags" class="form-input"
-                            placeholder="e.g., breakthrough, memories, self-care, growth">
+                        <label class="block font-medium mb-3">Tags:</label>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            {% for tag in ['Breakthrough', 'Memories', 'Self-Care', 'Growth', 'Anxiety', 'Gratitude'] %}
+                            <button type="button"
+                                class="tag-chip px-3 py-1 bg-slate-100 hover:bg-rose-100 hover:text-rose-600 rounded-full text-sm transition border border-slate-200"
+                                onclick="addTag('{{ tag }}')">
+                                <i class="fas fa-plus text-xs mr-1"></i> {{ tag }}
+                            </button>
+                            {% endfor %}
+                        </div>
+                        <input type="text" name="tags" id="tagsInput" class="form-input"
+                            placeholder="Select tags above or type your own (comma separated)">
                     </div>
 
                     <!-- Submit & Analyze -->
@@ -168,4 +177,32 @@
         {% endif %}
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function addTag(tag) {
+        const input = document.getElementById('tagsInput');
+        let currentVal = input.value;
+
+        // Remove trailing commas and spaces
+        currentVal = currentVal.replace(/,\s*$/, '');
+
+        const currentTags = currentVal.split(',').map(s => s.trim()).filter(s => s);
+
+        if (!currentTags.includes(tag)) {
+            currentTags.push(tag);
+            input.value = currentTags.join(', ');
+
+            // Visual feedback
+            const btn = event.currentTarget;
+            btn.classList.add('bg-rose-100', 'text-rose-600', 'border-rose-200');
+            setTimeout(() => {
+                if (!input.value.includes(tag)) { // Only reset if removed (not really possible here but for effect)
+                    // Keep highlighted? No, let's just flash it
+                }
+            }, 300);
+        }
+    }
+</script>
 {% endblock %}
