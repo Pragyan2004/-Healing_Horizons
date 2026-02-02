@@ -12,3 +12,4 @@ email-validator
 pandas
 plotly
 python-multipart
+groq
