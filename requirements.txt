@@ -12,4 +12,5 @@ email-validator
 pandas
 plotly
 python-multipart
-groq
+groq==0.11.0
+
